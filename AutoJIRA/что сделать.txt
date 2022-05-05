@@ -1,0 +1,14 @@
+permissions в манифесте - указать только сайт эдитора и джиры
+chrome.tabs.executeScript( - тут надо проверку на какой вкладке находишься. в зависимости от 	этого выполнять тот или другой метод (копи или пасте)
+
+ //// visualizationURL = `https://storage.googleapis.com/data-analysis-reports/vd_vis/20220424%20075842.468720%20Bobbers%20Tap%20${venueObject["oid:pl"]}%20200.0%20start%2020220301%20end%2020220331?Expires=1658563123&GoogleAccessId=689760566032-m0oc5b5soasd2bc300dsoggera29ko2i%40developer.gserviceaccount.com&Signature=LSaN5i9b828nkNSa9mYsKqFJPl2cpY2P05Na4Jb%2B82HyUXKefBjFLZxlKR93wx2vFl%2F4zc%2FyKFgw%2FQn%2FqB8MOF6%2F532irSKswbWJnghZePTTumxOU0vsGWS%2BwD9llP8057BfawdqBdKHNlSf3W0O4cgXgXcrBL3OMNBCkrVGdC4%3D`
+  ////// добавить в visualizationURL радиус (пр. 200м) и др. параметры как переменные
+
+Вопросы:
+1. что такое __data__ в венью эдиторе? как добраться?
+2. изменить значение в поле джиры. как?
+3. сохранить объект глобально. как?
+4. IFrame ?
+5. Сохранить объект на комп
+6. hui
+

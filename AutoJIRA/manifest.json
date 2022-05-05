@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "AutoJIRA",
+    "description": "by Mykhailo Semernin",
+    "version": "1.0",
+    "icons": {
+        "16": "images/empty_16.png",
+        "32": "images/empty_32.png",
+        "48": "images/empty_48.png",
+        "64": "images/empty_64.png",
+        "128": "images/empty_128.png"
+    },
+    "permissions": [
+        "http://*/",
+        "https://*/",
+        "tabs",
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_icon": {
+            "16": "images/empty_16.png",
+            "32": "images/empty_32.png",
+            "48": "images/empty_48.png",
+            "64": "images/empty_64.png",
+            "128": "images/empty_128.png"
+        },
+        "default_title": "AutoJIRA by Mykhailo Semernin",
+        "default_popup": "/popup/popup.html"
+    },
+    "background": {
+        "service_worker": "./popup/popup.html"
+    }
+}
