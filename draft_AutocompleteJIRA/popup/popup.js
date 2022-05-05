@@ -59,7 +59,7 @@ function copyFromEditor() {
 
   let venueURL;
   let visualizationURL;
-  let venueObject = {};
+  let venueObject = {addr: "адрес"};
   let fullVenueAddr;
 
   for (let i = 0; i < keyWrap.length; i++) {
@@ -132,13 +132,23 @@ function pasteToJira() {
 
         const event = {
           target: {
-            value: "9999",
+            value: venueObject.addr,
             // validationMessage: "invalid..."
           }
         };
-
+        
+        const inputKeys = Object.keys(jiraFieldValueInput[0]);
+        console.log(inputKeys);
+        for (let i = 0; i < inputKeys.length; i++) {
+          if (inputKeys[i].includes("reactEventHandler")) {
+            jiraFieldValueInput[0][inputKeys[i]].onChange(event);
+          } else {
+            alert("Error: reactEventHandler not found");
+          }
+        }
+        // const reactEventHandler = inputKeys.filter(key => key.includes("reactEventHandler"));
+        // console.log(reactEventHandler);
         // jiraFieldValueInput[0].__reactEventHandlers$idst5qaunsh.onChange(event);
-        jiraFieldValueInput[0]. __reactEventHandlers$heoklt2ukj.onChange(event);
 
         jiraFieldValueInput[0].focus();
       }, 2000)
