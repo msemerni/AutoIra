@@ -10,6 +10,7 @@ console.log([tab]);
     function: copyFromEditor,
     // file: 'snowfall2020.js'
   });
+  window.close();
 });
 
 pasteBtn.addEventListener("click", async () => {
@@ -20,12 +21,14 @@ pasteBtn.addEventListener("click", async () => {
     function: pasteToJira,
     // file: 'snowfall2020.js'
   });
+  window.close();
+
 });
 
 
 // The body of these functions will be execuetd as a content script inside the
 // current page
-const copyFromEditor = () => {
+const copyFromEditor = async () => {
   const venueObjKey =  document.querySelectorAll(".tag-list .key-wrap>input" );
   const venueObjValue =  document.querySelectorAll(".tag-list .value-wrap>input" );
 
@@ -52,41 +55,75 @@ const copyFromEditor = () => {
 }
 
 const pasteToJira = async () => {
+
+  //   // const jiraDiv = document.querySelector(".cGzqVy");
+  // // const bufferDivPaste = document.createElement("textarea");
+  // // bufferDivPaste.className = "bufferDivPaste";
+  // // jiraDiv.append(bufferDivPaste);
+  // // bufferDivPaste.focus();
+  // // setTimeout(function () {
+  // //   // bufferDivPaste.click();
+  // //   // bufferDivPaste.execCommand("paste");
+  // //   try {
+  // //   document.execCommand("insertText", false, "uuuu");
+      
+  // //   } catch (error) {
+  // //     console.log(error);
+  // //   }
+
+  // // }, 1000)
+
+/////// PASTE
+
   try {
     console.log("pasted venueObject to Jira");
     // console.log(venueObject);
     const permission = await navigator.permissions.query({ name: 'clipboard-read' });
+    const permission2 = await navigator.permissions.query({ name: 'geolocation' });
     console.log(permission);
+    console.log(permission2);
 
     permission.onchange = (e) => {
       console.log(e);
 
     }
-  
+
     if (permission.state === 'denied') {
       throw new Error('Not allowed to read clipboard.');
     }
-      navigator.clipboard.readText()
-        .then(text => {
-          const jiraDiv = document.querySelector(".cGzqVy");
-          const bufferDivPaste = document.createElement("textarea");
-          bufferDivPaste.className = "bufferDivPaste";
-          bufferDivPaste.value = text;
-          jiraDiv.append(bufferDivPaste);
-          bufferDivPaste.focus();
-          alert(text);
-          console.log(text);
-        })
-        .catch(err => {
-          console.dir(err);
-        });
+
+// setTimeout(async()=>console.log(
+//      await window.navigator.clipboard.readText()), 3000)
+    navigator.clipboard.readText()
+      .then(text => {
+        const jiraDiv = document.querySelector(".bzpsgq");
+        const bufferDivPaste = document.createElement("textarea");
+        bufferDivPaste.className = "bufferDivPaste";
+        bufferDivPaste.style.cssText= `
+        position: absolute;
+        top: 100px;
+        left: 300px;
+        z-index: 99999;
+        height: 300px;
+        width: 200px;
+    `;
+        bufferDivPaste.value = text;
+        jiraDiv.append(bufferDivPaste);
+        bufferDivPaste.focus();
+        console.log(document.hasFocus());  // false
+        // alert(text);
+        console.log(text);
+      })
+      .catch(err => {
+        console.dir(err);
+      });
   } catch (error) {
     console.log(error);
   }
- 
+
 
 };
-  /////// PASTE
+  
 
   
 

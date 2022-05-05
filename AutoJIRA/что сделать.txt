@@ -12,3 +12,7 @@ chrome.tabs.executeScript( - тут надо проверку на какой в
 5. Сохранить объект на комп
 6. hui
 
+
+
+Permissions - allow (Chrome)
+
