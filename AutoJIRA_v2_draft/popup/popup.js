@@ -5,6 +5,7 @@ const pasteBtn = document.getElementById("pasteButton");
 copyBtn.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 console.log([tab]);
+
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: copyFromEditor,
@@ -113,7 +114,7 @@ const pasteToJira = async () => {
         console.log(document.hasFocus());
         // alert(text);
         console.log(text);
-
+        // localStorage.setItem("venueObject", text); // сразу можно в локал сторедж
         // fillJiraFields();
         const parsedVenueObject = JSON.parse(bufferDivPaste.value);
         console.log(parsedVenueObject);
@@ -124,7 +125,7 @@ const pasteToJira = async () => {
         }, 4000);
 
         //////////////////////////////////////////////////////////////////////
-        
+
 
         //////////////////////////////////////////////////////////////////////
 
