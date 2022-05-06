@@ -132,7 +132,7 @@ function pasteToJira() {
 
         const event = {
           target: {
-            value: venueObject.addr,
+            value: "venueObject.addr",
             // validationMessage: "invalid..."
           }
         };
@@ -143,7 +143,7 @@ function pasteToJira() {
           if (inputKeys[i].includes("reactEventHandler")) {
             jiraFieldValueInput[0][inputKeys[i]].onChange(event);
           } else {
-            alert("Error: reactEventHandler not found");
+            console.log("Error: reactEventHandler not found");
           }
         }
         // const reactEventHandler = inputKeys.filter(key => key.includes("reactEventHandler"));

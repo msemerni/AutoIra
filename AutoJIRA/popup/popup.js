@@ -96,13 +96,13 @@ const pasteToJira = async () => {
 //      await window.navigator.clipboard.readText()), 3000)
     navigator.clipboard.readText()
       .then(text => {
-        const jiraDiv = document.querySelector(".bzpsgq");
+        const jiraDiv = document.querySelector("#jira-frontend");
         const bufferDivPaste = document.createElement("textarea");
-        bufferDivPaste.className = "bufferDivPaste";
+        bufferDivPaste.id = "bufferDivPaste";
         bufferDivPaste.style.cssText= `
         position: absolute;
         top: 100px;
-        left: 300px;
+        left: 100px;
         z-index: 99999;
         height: 300px;
         width: 200px;
@@ -110,9 +110,24 @@ const pasteToJira = async () => {
         bufferDivPaste.value = text;
         jiraDiv.append(bufferDivPaste);
         bufferDivPaste.focus();
-        console.log(document.hasFocus());  // false
+        console.log(document.hasFocus());
         // alert(text);
         console.log(text);
+
+        // fillJiraFields();
+        const parsedVenueObject = JSON.parse(bufferDivPaste.value);
+        console.log(parsedVenueObject);
+        localStorage.setItem("venueObject", JSON.stringify(parsedVenueObject));
+        // removeBufferDiv();
+        setTimeout(() => {
+          bufferDivPaste.remove();
+        }, 4000);
+
+        //////////////////////////////////////////////////////////////////////
+        
+
+        //////////////////////////////////////////////////////////////////////
+
       })
       .catch(err => {
         console.dir(err);
@@ -121,13 +136,24 @@ const pasteToJira = async () => {
     console.log(error);
   }
 
-
+  
 };
+
+
+
+
+
+
+
+// function fillJiraFields() {
   
+// }
+
+// function removeBufferDiv() {
+
+// }
 
   
-
-
 
 
 //////////////////////////////////////////////
