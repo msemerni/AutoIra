@@ -38,7 +38,7 @@ const copyFromEditor = async () => {
 
   let venueObject = {};
 
-  for (let i = 0; i < venueObjValue.length; i++) {
+    for (let i = 0; i < venueObjValue.length; i++) {
     venueObject[venueObjKey[i].value] = venueObjValue[i].value;
   };
   console.log(venueObject);

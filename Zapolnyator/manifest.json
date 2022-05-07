@@ -11,12 +11,12 @@
         "128": "images/icon_128.png"
     },
     "permissions": [
-        "http://*/",
-        "https://*/",
         "tabs",
         "storage",
         "activeTab",
-        "scripting"
+        "scripting",
+        "clipboardRead",
+        "clipboardWrite"
     ],
     "action": {
         "default_icon": {
@@ -27,9 +27,6 @@
             "128": "images/icon_128.png"
         },
         "default_title": "Zapolnyator by Mykhailo Semernin",
-        "default_popup": "/popup/popup.html"
-    },
-    "background": {
-        "service_worker": "./popup/popup.html"
+        "default_popup": "./popup/popup.html"
     }
 }

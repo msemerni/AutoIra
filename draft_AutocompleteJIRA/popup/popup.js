@@ -130,13 +130,19 @@ function pasteToJira() {
         jiraFieldValueInput[0].focus();
         // jiraFieldValueInput[0].value = "888";
 
+
+        const analyticsUrl = "https://analytics.placer.ai/#!/admin/insights/venues/54606084663119de80ffb56f/overview?competitor=[]";
+        const analyticsUrlCutted = analyticsUrl.substring(0, analyticsUrl.indexOf("?"));
+        console.log(analyticsUrlCutted);
+
+
         const event = {
           target: {
             value: "venueObject.addr",
             // validationMessage: "invalid..."
           }
         };
-        
+
         const inputKeys = Object.keys(jiraFieldValueInput[0]);
         console.log(inputKeys);
         for (let i = 0; i < inputKeys.length; i++) {
@@ -160,16 +166,16 @@ function pasteToJira() {
       // catch (e) { a = t.target.value } 
       // else a = t.target.value; "url" === n && this.setState({ showValidationMessage: !1, invalidMessage: t.target.validationMessage }), this.props.onChange(a) }
 
-      let jiraFieldValueBtnApply = document.querySelector(".iNYbiH");
+      let hui = document.querySelector(".iNYbiH");
       // let jiraFieldValueBtn = document.querySelectorAll(".doKTJP");
 
       setTimeout(function () {
-        jiraFieldValueBtnApply.click();
+        hui.click();
       }, 4000)
 
       // console.log(jiraFieldValueInput);
       // console.log(jiraFieldValueInput[0]);
-      // console.log(jiraFieldValueBtnApply);
+      // console.log(hui);
       // console.log(jiraFieldValueBtn);
 
       // jiraFieldValueInput.value = "777";
