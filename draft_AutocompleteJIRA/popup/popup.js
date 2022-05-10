@@ -87,7 +87,7 @@ function pasteToJira() {
 
   document.addEventListener('click', e => {
     console.log("**************");
-    console.log(e.target);
+    console.dir(e.target);
     console.log("++++++++++++++");
   })
   // document.addEventListener('click', e => {

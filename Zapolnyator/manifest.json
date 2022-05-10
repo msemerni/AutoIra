@@ -10,6 +10,10 @@
         "64": "images/icon_64.png",
         "128": "images/icon_128.png"
     },
+    "web_accessible_resources": [{
+        "resources": ["/popup/snowfall2020.js"],
+        "matches": ["<all_urls>"]
+      }],
     "permissions": [
         "tabs",
         "storage",
