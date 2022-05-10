@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Zapolnyator",
-    "description": "by Mykhailo Semernin______________________ Autocomplete fields in Jira from Venues Editor (2022-05-11)",
+    "description": "by Mykhailo Semernin______________________ Autocomplete fields in Jira from Venues Editor (2022-05-10)",
     "version": "1.0",
     "icons": {
         "16": "images/icon_16.png",

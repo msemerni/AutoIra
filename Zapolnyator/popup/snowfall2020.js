@@ -1,85 +1,127 @@
-// alert("EEEEE");
-// alert(window.location.href);
-
 try {
-    if (window.location.hostname.indexOf("placer.atlassian") === -1) {
-      throw new Error("Switch to Jira ('https://placer.atlassian.net/...')");
-    }
+  if (window.location.hostname.indexOf("placer.atlassian") === -1) {
+    throw new Error("Switch to Jira ('https://placer.atlassian.net/...')");
+  }
 
-    // localStorage.removeItem("venueObject");
+  localStorage.removeItem("venueObject");
 
-    const permission = navigator.permissions.query({ name: 'clipboard-read' });
+  const permission = navigator.permissions.query({ name: 'clipboard-read' });
 
-    if (permission.state === "denied") {
-      throw new Error("Not allowed to read clipboard.");
-    }
-    else if (permission.state === 'prompt') {
-      throw new Error("Allow permission for clipboard.");
-    }
+  if (permission.state === "denied") {
+    throw new Error("Not allowed to read clipboard.");
+  }
+  else if (permission.state === 'prompt') {
+    throw new Error("Allow permission for clipboard.");
+  }
 
-    navigator.clipboard.readText()
-      .then(textInClipboard => {
-        localStorage.setItem("venueObject", textInClipboard);
+  navigator.clipboard.readText()
+    .then(textInClipboard => {
+      localStorage.setItem("venueObject", textInClipboard);
 
-        let venueObject = localStorage.getItem("venueObject");
+      let venueObject = JSON.parse(localStorage.getItem("venueObject"));
+      console.log(venueObject);
+      ///////////////////////////////////////////////////////////////////////////
+      const jiraFields = document.querySelectorAll(".gbXyYv");
+      console.log(jiraFields);
+      for (let i = 0; i < jiraFields.length; i++) {
+        if (jiraFields[i].innerText.includes("Category")) {
+
+          let n = venueObject["category:pl"];
+          console.log("!!!!!!!");
+          console.log(venueObject);
+          console.log(n);
+          console.log("!!!!!!!");
+
+          let eventForOnChange = {
+            target: {
+              value: n,
+              // validationMessage: "invalid..."
+            }
+          };
+
+
+          let jiraFieldValueDiv = jiraFields[i].querySelector(".kLiHRY");
+          jiraFieldValueDiv.click();
+
+          let jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
+          jiraFieldValueInput[0].focus();
+          jiraFieldValueInput[0].click();
+          console.log(jiraFieldValueInput);
+
+          const inputKeys = Object.keys(jiraFieldValueInput[0]);
+          console.log(inputKeys);
+
+          for (let i = 0; i < inputKeys.length; i++) {
+            if (inputKeys[i].includes("reactEventHandler")) {
+              console.log("@@@@@");
+              console.log(inputKeys[i]);
+              console.log("@@@@@");
+              jiraFieldValueInput[0][inputKeys[i]].onChange(eventForOnChange);
+            } else {
+              console.log("Error: reactEventHandler not found");
+            }
+          }
+          let hui = document.querySelector(".iNYbiH");
+          hui.click();
+
+        }
+      //////////////////////////////////////////////////////////////////////////
+      if (jiraFields[i].innerText.includes("Entity Name")) {
+        let n = venueObject["name"];
+        console.log("!!!!!!!");
         console.log(venueObject);
-        ///////////////////////////////////////////////////////////////////////////
-        const jiraFields = document.querySelectorAll(".gbXyYv");
+        console.log(n);
+        console.log("!!!!!!!");
 
-        for (let i = 0; i < jiraFields.length; i++) {
-          if (jiraFields[i].innerText.includes("Category")) {
-            console.log("ЭТО КАТЕГОРИЯ");
-            document.addEventListener('click', e => {
-              console.log(">>>>>>>>>>>>>>");
-              console.log(e.target);
-              console.dir(e.target);
-              console.log("<<<<<<<<<<<<<<");
-            })
-
-            let jiraFieldValueDiv = jiraFields[i].querySelector(".kLiHRY");
-            jiraFieldValueDiv.click();
-
-            let jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
-            jiraFieldValueInput[0].focus();
-            jiraFieldValueInput[0].click();
-            // jiraFieldValueInput[0].value = "55555"
-            console.log(jiraFieldValueInput);
-
-
-
-          const event = {
+        let eventForOnChange = {
           target: {
-            value: "venueObject.Категория",
+            value: n,
             // validationMessage: "invalid..."
           }
         };
 
+
+        let jiraFieldValueDiv = jiraFields[i].querySelector(".kLiHRY");
+        jiraFieldValueDiv.click();
+
+        let jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
+        jiraFieldValueInput[0].focus();
+        jiraFieldValueInput[0].click();
+        console.log(jiraFieldValueInput);
+
         const inputKeys = Object.keys(jiraFieldValueInput[0]);
         console.log(inputKeys);
-        jiraFieldValueInput[0].__reactEventHandlers$i8b2z244fsk.onChange(event);
 
-        // for (let i = 0; i < inputKeys.length; i++) {
-        //   if (inputKeys[i].includes("reactEventHandler")) {
-        //     jiraFieldValueInput[0][inputKeys[i]].onChange(event);
-        //     jiraFieldValueInput[0].__reactEventHandlers$sdu4ldbhtgs.onChange(event);
-        //   } else {
-        //     console.log("Error: reactEventHandler not found");
-        //   }
-        // }
-
+        for (let i = 0; i < inputKeys.length; i++) {
+          if (inputKeys[i].includes("reactEventHandler")) {
+            console.log("@@@@@");
+            console.log(inputKeys[i]);
+            console.log("@@@@@");
+            jiraFieldValueInput[0][inputKeys[i]].onChange(eventForOnChange);
+          } else {
+            console.log("Error: reactEventHandler not found");
           }
         }
+        let hui = document.querySelector(".iNYbiH");
+        hui.click();
+
+      }
 
 
-console.log(venueObject);
-        //////////////////////////////////////////////////////////////////////////
-      })
-      .catch((error) => {
-        alert(`${error}\nPaste failed`);
-        console.dir(error);
-      });
+      }
+      //////////////////////////////////////////////////////////////////////////
+    })
+    .catch((error) => {
+      alert(`${error}\nPaste failed`);
+      console.dir(error);
+    });
 
-  } catch (error) {
-    alert(`${error}\nPaste failed!`);
-    console.dir(error);
-  }
+} catch (error) {
+  alert(`${error}\nPaste failed!`);
+  console.dir(error);
+}
+
+
+function pasteToJira() {
+
+}
