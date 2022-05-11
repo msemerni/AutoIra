@@ -11,7 +11,7 @@
         "128": "images/icon_128.png"
     },
     "web_accessible_resources": [{
-        "resources": ["/popup/snowfall2020.js"],
+        "resources": ["/popup/pasteToJira.js"],
         "matches": ["<all_urls>"]
       }],
     "permissions": [

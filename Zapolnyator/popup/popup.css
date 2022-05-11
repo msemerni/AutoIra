@@ -1,3 +1,28 @@
+@font-face {
+  font-family: 'Quantico';
+  src: url(../fonts/Quantico/Quantico-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Quantico';
+  src: url(../fonts/Quantico/Quantico-Italic.ttf);
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Quantico';
+  src: url(../fonts/Quantico/Quantico-Bold.ttf);
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Quantico';
+  src: url(../fonts/Quantico/Quantico-Italic.ttf);
+  font-weight: bold;
+  font-style: italic;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -13,6 +38,7 @@ html {
 body {
   margin: 0;
   font-size: 16px;
+  font-family: Quantico, Verdana, Arial, sans-serif;
 }
 
 img {
@@ -30,7 +56,7 @@ img {
   padding: 3px;
 }
 
-#copyButton, #pasteButton {
+.copyButton, .pasteButton {
   background: rgb(52, 209, 209);
   border-radius: 5px;
   border-color: rgb(52, 209, 209);
@@ -40,9 +66,34 @@ img {
   font-weight: 600;
 }
 
-#copyButton:hover, #pasteButton:hover {
+.copyButton:hover, .pasteButton:hover, .helpButton:hover {
   background-color: aquamarine;
   transition: background-color 0.2s ease-in;
   transform: scale(1.05);
   cursor: pointer;
+}
+
+.footerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appTitle {
+  color: blue;
+  font-size: 8px;
+  margin-left: 4px;
+  padding: 0;
+  cursor: progress;
+}
+
+.helpButton {
+  width: 8px;
+  height: 8px;
+  border-width: 0;
+  margin-right: 4px;
+  font-size: 7px;
 }
