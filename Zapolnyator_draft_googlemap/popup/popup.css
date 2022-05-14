@@ -4,21 +4,18 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Quantico';
   src: url(../fonts/Quantico/Quantico-Italic.ttf);
   font-weight: normal;
   font-style: italic;
 }
-
 @font-face {
   font-family: 'Quantico';
   src: url(../fonts/Quantico/Quantico-Bold.ttf);
   font-weight: bold;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Quantico';
   src: url(../fonts/Quantico/Quantico-Italic.ttf);
@@ -59,22 +56,21 @@ img {
   padding: 3px;
 }
 
-.copyButton,
-.pasteButton {
-  background: #37bfbf;
+.copyButton, .pasteButton {
+  background: rgb(52, 209, 209);
   border-radius: 5px;
+  border-color: rgb(52, 209, 209);
   border-width: 0;
   padding: 4px;
   margin: 3px;
+  font-weight: 600;
   font-family: 'Quantico';
   font-size: 15px;
 }
 
-.copyButton:hover,
-.pasteButton:hover,
-.helpButton:hover {
-  background-color: #7fffd4;
-  /* transition: background-color 0.2s ease-in; */
+.copyButton:hover, .pasteButton:hover, .helpButton:hover {
+  background-color: aquamarine;
+  transition: background-color 0.2s ease-in;
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -88,6 +84,14 @@ img {
   align-items: center;
 }
 
+.appTitle {
+  color: blue;
+  font-size: 8px;
+  /* margin-left: 4px; */
+  padding: 0;
+  cursor: progress;
+}
+
 .helpButton {
   width: 8px;
   height: 8px;
@@ -95,13 +99,6 @@ img {
   margin-left: 4px;
   font-size: 7px;
   font-family: 'Quantico';
-}
-
-.appTitle {
-  color: blue;
-  font-size: 8px;
-  padding: 0;
-  cursor: progress;
 }
 
 /* The switch - the box around the slider */
@@ -128,7 +125,7 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #bf2323;
+  background-color: red;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -140,24 +137,24 @@ img {
   width: 8px;
   left: 1px;
   bottom: 1px;
-  background-color: #37bfbf;
+  background-color: rgb(52, 209, 209);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
-input:checked+.slider {
-  background-color: #3d7e2d;
+input:checked + .slider {
+  background-color: green
 }
 
-/* input:focus + .slider {
+input:focus + .slider {
   box-shadow: 0 0 1px green
-} */
+}
 
-input:checked+.slider:before {
-  -webkit-transform: translateX(8px);
-  -ms-transform: translateX(8px);
-  transform: translateX(8px);
-  background-color: #37bfbf;
+input:checked + .slider:before {
+  -webkit-transform: translateX(7px);
+  -ms-transform: translateX(7px);
+  transform: translateX(7px);
+  background-color: rgb(52, 209, 209);
 }
 
 /* Rounded sliders */

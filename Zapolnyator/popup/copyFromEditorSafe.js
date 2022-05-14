@@ -1,84 +1,112 @@
 try {
   const currentURL = window.location.href;
+  const workVEURL = "http://venues.placer.team:8080/";
+  const learnVEURL = "http://staging-venues.placer.team:8080/";
   const venueObject = {};
+  const oId = "oid:pl";
+  const name = "name";
+  const addrCity = "addr:city";
+  const addrPostcode = "addr:postcode";
+  const addrState = "addr:state";
+  const addrStreet = "addr:street";
+  const category = "category:pl";
+  const openingHours = "opening_hours:pl";
+  const manuallyReviewedStatus = "manually_reviewed_status:pl";
+  const analyticsUrl = "analytics:url:pl";
 
-  //// copy from Venue Editor
-  if (currentURL.indexOf("http://venues.placer.") === 0 || currentURL.indexOf("http://staging-venues.placer.") === 0) {
+  //// copy tags from Venues Editor to venueObject
+  if (currentURL.indexOf(workVEURL) === 0 || currentURL.indexOf(learnVEURL) === 0) {
 
     const venueObjKey = document.querySelectorAll(".tag-list .key-wrap>input");
     const venueObjValue = document.querySelectorAll(".tag-list .value-wrap>input");
 
     for (let i = 0; i < venueObjKey.length; i++) {
-
-      if (([venueObjKey[i].value] == "name" && !venueObjValue[0].value) ||
-        ([venueObjKey[i].value] == "addr:city" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "addr:postcode" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "addr:state" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "addr:street" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "category:pl" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "opening_hours:pl" && !venueObjValue[i].value) ||
-        ([venueObjKey[i].value] == "manually_reviewed_status:pl" && !venueObjValue[i].value)) {
-        throw new Error("Value in required tag is empty");
-      }
       venueObject[venueObjKey[i].value] = venueObjValue[i].value;
+
+      //// highlight empty value of required tags in Venues Editor
+      if (!venueObjValue[i].value) {
+        venueObjValue[i].style.cssText = `
+        background: #ff000080;
+        `;
+        venueObjValue[i].addEventListener("click", () => {
+          venueObjValue[i].style.cssText = `
+          background: #fff;
+          `;
+        });
+      }
+      //// end highlight empty value of required tags in Venues Editor
     };
 
     const zoomToSelectionBtn = document.querySelector(".zoom-to-selection-control>.disabled");
 
-    if (!venueObject["oid:pl"] || zoomToSelectionBtn !== null) {
-      throw new Error("Pick a point first");
+    if (!venueObject[oId] || zoomToSelectionBtn) {
+      copyToClipboard({});
+      throw new Error("Pick a point first\n");
     }
 
-    if (!venueObject.hasOwnProperty("name") || !venueObject.hasOwnProperty("addr:city") || !venueObject.hasOwnProperty("addr:postcode") ||
-      !venueObject.hasOwnProperty("addr:state") || !venueObject.hasOwnProperty("addr:street") || !venueObject.hasOwnProperty("category:pl") ||
-      !venueObject.hasOwnProperty("opening_hours:pl") || !venueObject.hasOwnProperty("manually_reviewed_status:pl")) {
-      throw new Error("Venue has missing required tag");
+    //// check required tags in venueObject
+    let missingTagsValues = "";
+    let missingTags = "";
+    let indexOfTag = 1;
+
+    for (const prop in venueObject) {
+      if ((prop === name || prop === addrCity || prop === addrPostcode || prop === addrState
+        || prop === addrStreet || prop === category || prop === openingHours
+        || prop === manuallyReviewedStatus || prop === analyticsUrl)
+        && (!venueObject[prop])) {
+        missingTagsValues += `${indexOfTag++}. ${prop}\n`;
+      }
     }
 
-    venueObject.fullAddress = `${venueObject["addr:street"]}, ${venueObject["addr:city"]}, ${venueObject["addr:state"]} ${venueObject["addr:postcode"]}`;
-    venueObject.analyticsUrlCutted = venueObject["analytics:url:pl"].substring(0, venueObject["analytics:url:pl"].indexOf("?"));
+    if (missingTagsValues) {
+      copyToClipboard({});
+      throw new Error(`Check value for required tags:\n\n${missingTagsValues}`);
+    }
+
+    if (!venueObject.hasOwnProperty(name)) { missingTags += `${indexOfTag++}. ${name}\n`; }
+    if (!venueObject.hasOwnProperty(addrCity)) { missingTags += `${indexOfTag++}. ${addrCity}\n`; }
+    if (!venueObject.hasOwnProperty(addrPostcode)) { missingTags += `${indexOfTag++}. ${addrPostcode}\n`; }
+    if (!venueObject.hasOwnProperty(addrState)) { missingTags += `${indexOfTag++}. ${addrState}\n`; }
+    if (!venueObject.hasOwnProperty(addrStreet)) { missingTags += `${indexOfTag++}. ${addrStreet}\n`; }
+    if (!venueObject.hasOwnProperty(category)) { missingTags += `${indexOfTag++}. ${category}\n`; }
+    if (!venueObject.hasOwnProperty(openingHours)) { missingTags += `${indexOfTag++}. ${openingHours}\n`; }
+    if (!venueObject.hasOwnProperty(manuallyReviewedStatus)) { missingTags += `${indexOfTag++}. ${manuallyReviewedStatus}\n`; }
+    if (!venueObject.hasOwnProperty(analyticsUrl)) { missingTags += `${indexOfTag++}. ${analyticsUrl}\n`; }
+
+    if (missingTags) {
+      copyToClipboard({});
+      throw new Error(`Missing required tags:\n\n${missingTags}`);
+    }
+    //// end check required tags in Venues Editor
+
+    venueObject.fullAddress = `${venueObject[addrStreet]}, ${venueObject[addrCity]}, ${venueObject[addrState]} ${venueObject[addrPostcode]}`;
+    venueObject.analyticsUrlCutted = venueObject[analyticsUrl].substring(0, venueObject[analyticsUrl].indexOf("?"));
     venueObject.venueURL = currentURL;
 
-    //// copy from Google Maps
-  } else if (currentURL.indexOf("https://www.google.com/maps/") === 0) {
-
-    if (currentURL.indexOf("https://www.google.com/maps/place/") === -1) {
-      throw new Error("Pick a point first");
-    }
-
-    const shareBtn = document.querySelector("button[data-value='Share']");
-    shareBtn.click();
-    shareBtn.click();
-    console.dir(shareBtn);
-
-    const shareBtnLinkInput = this.find("#modal-dialog");
-    console.dir(this);
-    console.dir(shareBtnLinkInput);
-    // venueObject.googleMapLink = shareBtnLinkInput.value;
-
   } else {
-    throw new Error("Switch to Venue Editor\n('http://venues.placer.team:8080/...' or\n'http://staging-venues.placer.team:8080/...') or\nGoogle Maps ('https://www.google.com/maps/...')");
+    throw new Error(`Switch to Venues Editor\n(${workVEURL} or\n${learnVEURL})`);
   }
 
-  //// Copy venueObject to Clipboard
+  copyToClipboard(venueObject);
+
+} catch (error) {
+  alert(`${error}\nCopy failed!`);
+}
+
+//// Copy venueObject to Clipboard
+function copyToClipboard(venueObject) {
   const bufferDivCopy = document.createElement("textarea");
   bufferDivCopy.id = "bufferDivCopy";
   bufferDivCopy.style.cssText = `
-      position: absolute;
-      top: -99999px;
-      left: -99999px;
-      z-index: -99999;
-      opacity: 0;
-      `;
-
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    z-index: -99999;
+    opacity: 0;
+    `;
   bufferDivCopy.innerHTML = JSON.stringify(venueObject);
   document.body.append(bufferDivCopy);
   bufferDivCopy.select();
   document.execCommand("copy");
   bufferDivCopy.remove();
-
-
-} catch (error) {
-  alert(`${error}\nCopy failed!`);
-  console.dir(error);
 }
