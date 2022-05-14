@@ -51,12 +51,12 @@ img {
 }
 
 .container {
-  width: 85px;
+  width: 80px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background: lightgray;
-  padding: 3px;
+  background: #d3d3d3;
+  padding: 4px;
 }
 
 .copyButton,
@@ -65,7 +65,7 @@ img {
   border-radius: 5px;
   border-width: 0;
   padding: 4px;
-  margin: 3px;
+  margin: 0 0 6px 0;
   font-family: 'Quantico';
   font-size: 15px;
 }
@@ -92,13 +92,12 @@ img {
   width: 8px;
   height: 8px;
   border-width: 0;
-  margin-left: 4px;
   font-size: 7px;
   font-family: 'Quantico';
 }
 
 .appTitle {
-  color: blue;
+  color: #0000ff;
   font-size: 8px;
   padding: 0;
   cursor: progress;
@@ -110,7 +109,6 @@ img {
   display: inline-block;
   width: 18px;
   height: 10px;
-  margin-right: 4px;
 }
 
 /* Hide default HTML checkbox */

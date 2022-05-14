@@ -8,8 +8,7 @@ try {
 
     if (permission.state === "denied") {
       throw new Error("Not allowed to read clipboard.\n");
-    }
-    else if (permission.state === 'prompt') {
+    } else if (permission.state === 'prompt') {
       throw new Error("Allow permission for clipboard.\n");
     }
 
@@ -28,124 +27,61 @@ try {
           const category = "category:pl";
           const address = "fullAddress";
 
-          console.log(venueObject);
-          console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
+          // paste values to Jira fields
           const jiraFields = document.querySelectorAll(".gbXyYv");
-          console.log(jiraFields);
-          console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
-          /////////////////////////////////////////////////////////////////////////////
 
           for (let i = 0; i < jiraFields.length; i++) {
-
-            // if (jiraFields[i].innerText.indexOf("Venue Editor Link") === 0) {
-            //   const tagValue = venueObject[venueEditorLink];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } else if (jiraFields[i].innerText.indexOf("Analytics Link") === 0) {
-            //   const tagValue = venueObject[analyticsLink];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } else if (jiraFields[i].innerText.indexOf("Entity ID") === 0) {
-            //   const tagValue = venueObject[entityID];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } else if (jiraFields[i].innerText.indexOf("Entity Name") === 0) {
-            //   const tagValue = venueObject[entityName];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } else if (jiraFields[i].innerText.indexOf("Category") === 0) {
-            //   const tagValue = venueObject[category];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } else if (jiraFields[i].innerText.indexOf("Address") === 0) {
-            //   const tagValue = venueObject[address];
-            //   pasteValuesToJiraFields(tagValue, i);
-            // } 
-
-
-            if (jiraFields[i].innerText.indexOf("Reason Undelivered") === 0) {
-              const tagValue = "Indoor";
-              pasteValuesToJiraFields2(tagValue, 13);
+            if (jiraFields[i].innerText.indexOf("Venue Editor Link") === 0) {
+              const tagValue = venueObject[venueEditorLink];
+              pasteValuesToJiraFields(tagValue, i);
+            } else if (jiraFields[i].innerText.indexOf("Analytics Link") === 0) {
+              const tagValue = venueObject[analyticsLink];
+              pasteValuesToJiraFields(tagValue, i);
+            } else if (jiraFields[i].innerText.indexOf("Entity ID") === 0) {
+              const tagValue = venueObject[entityID];
+              pasteValuesToJiraFields(tagValue, i);
+            } else if (jiraFields[i].innerText.indexOf("Entity Name") === 0) {
+              const tagValue = venueObject[entityName];
+              pasteValuesToJiraFields(tagValue, i);
+            } else if (jiraFields[i].innerText.indexOf("Category") === 0) {
+              const tagValue = venueObject[category];
+              pasteValuesToJiraFields(tagValue, i);
+            } else if (jiraFields[i].innerText.indexOf("Address") === 0) {
+              const tagValue = venueObject[address];
+              pasteValuesToJiraFields(tagValue, i);
             }
-
-
           }
-
-
-
-          function pasteValuesToJiraFields2(tagValue, jiraFieldindex) {
-            const jiraFields = document.querySelectorAll(".gbXyYv");
-            let eventForOnChange = {
-              target: {
-                value: tagValue,
-                // validationMessage: "invalid..."
-              }
-            };
-
-            let jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
-            jiraFieldValueDiv.click();
-            console.dir(jiraFieldValueDiv);
-            // let jiraFieldValueInput2 = document.querySelectorAll(".css-wrm96b-option");
-            let jiraFieldValueInput2 = document.querySelectorAll(".cspqsP");
-            jiraFieldValueInput2[16].click();
-            console.dir(jiraFieldValueInput2);
-
-            // .cspqsP
-            // .css-wrm96b-option
-            
-           
-
-
-          }
-          
-
-
-
-
 
           function pasteValuesToJiraFields(tagValue, jiraFieldindex) {
-            let eventForOnChange = {
+            const eventForOnChange = {
               target: {
                 value: tagValue,
                 // validationMessage: "invalid..."
               }
             };
-
-
-            let jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
+            const jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
             jiraFieldValueDiv.click();
-
-            let jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
-            jiraFieldValueInput[0].focus();
+            const jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
             jiraFieldValueInput[0].click();
-            console.log(jiraFieldValueInput);
-
             const inputKeys = Object.keys(jiraFieldValueInput[0]);
-            console.log(inputKeys);
+            const reactEventHandler = inputKeys.find(prop => prop.indexOf("__reactEventHandlers") === 0);
 
-            for (let i = 0; i < inputKeys.length; i++) {
-              if (inputKeys[i].includes("reactEventHandler")) {
-                console.log("@@@@@");
-                console.log(inputKeys[i]);
-                console.log("@@@@@");
-                jiraFieldValueInput[0][inputKeys[i]].onChange(eventForOnChange);
-              } else {
-                console.log("Error: reactEventHandler not found");
-              }
+            if (reactEventHandler) {
+              jiraFieldValueInput[0][reactEventHandler].onChange(eventForOnChange);
+            } else {
+              throw new Error(`__reactEventHandlers not found\n`);
             }
-            let hui = document.querySelector(".iNYbiH");
-            hui.click();
+
+            const shlyapa = document.querySelector(".iNYbiH");
+            shlyapa.click();
           }
 
-
-          //////////////////////////////////////////////////////////////////////////
         } else {
           throw new Error(`Not an object in clipboard\n`);
         }
-
-
-        //////////////////////////////////////////////////////////////////////////
       })
       .catch((error) => {
         alert(`${error}\nPaste failed`);
-        console.dir(error);
       });
 
   } else {
@@ -154,6 +90,4 @@ try {
 
 } catch (error) {
   alert(`${error}\nPaste failed!`);
-  console.dir(error);
 }
-
