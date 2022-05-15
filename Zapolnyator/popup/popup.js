@@ -48,8 +48,9 @@ helpButton.addEventListener("click", () => {
   2. Copy the data by clicking "Copy".
   3. Switch to Jira ('https://placer.atlassian.net/...').
   4. Paste the data to Jira by clicking "Paste".
-  5. Toggle "Check required tags" - check required tags
-     and existence of values:
+    _____________________________________________
+    Toggle "Check required tags" - check required tags
+     and existence of values in Venues Editor:
      - name
      - address
      - category

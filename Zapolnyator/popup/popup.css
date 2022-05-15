@@ -97,10 +97,11 @@ img {
 }
 
 .appTitle {
-  color: #0000ff;
+  color: #4d4dff;
   font-size: 8px;
   padding: 0;
   cursor: progress;
+  letter-spacing: 0.1px;
 }
 
 /* The switch - the box around the slider */
