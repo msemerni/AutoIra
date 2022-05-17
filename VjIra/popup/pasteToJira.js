@@ -29,7 +29,10 @@ try {
 
           // paste values to Jira fields
           const jiraFields = document.querySelectorAll(".gbXyYv");
-
+          if (!jiraFields) {
+            throw new Error(`CSS class for "jiraFields" not found\n`);
+          }
+          
           for (let i = 0; i < jiraFields.length; i++) {
             if (jiraFields[i].innerText.indexOf("Venue Editor Link") === 0) {
               const tagValue = venueObject[venueEditorLink];
@@ -59,10 +62,23 @@ try {
                 // validationMessage: "invalid..."
               }
             };
-            const jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
+
+            let jiraFieldValueDiv;
+            jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
+            if (!jiraFieldValueDiv) {
+              jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".cwFpGL");
+            }
+            if (!jiraFieldValueDiv) {
+              throw new Error(`CSS class for "jiraFieldValueDiv" not found\n`);
+            }
             jiraFieldValueDiv.click();
+
             const jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
+            if (!jiraFieldValueInput) {
+              throw new Error(`CSS class for "jiraFieldValueInput" not found\n`);
+            }
             jiraFieldValueInput[0].click();
+            
             const inputKeys = Object.keys(jiraFieldValueInput[0]);
             const reactEventHandler = inputKeys.find(prop => prop.indexOf("__reactEventHandlers") === 0);
 
@@ -72,7 +88,14 @@ try {
               throw new Error(`__reactEventHandlers not found\n`);
             }
 
-            const shlyapa = document.querySelector(".iNYbiH");
+            let shlyapa;
+            shlyapa = document.querySelector(".iNYbiH");
+            if (!shlyapa) {
+              shlyapa = document.querySelector(".css-l21pj7");
+            }
+            if (!shlyapa) {
+              throw new Error(`CSS class for "shlyapa" not found\n`);
+            }
             shlyapa.click();
           }
 
@@ -85,7 +108,7 @@ try {
       });
 
   } else {
-    throw new Error(`Switch to Jira\n(${workJiraURL})`);
+    throw new Error(`Switch to Jira\n(${workJiraURL})\n`);
   }
 
 } catch (error) {

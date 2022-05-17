@@ -84,7 +84,7 @@ try {
     venueObject.venueURL = currentURL;
 
   } else {
-    throw new Error(`Switch to Venues Editor\n(${workVEURL} or\n${learnVEURL})`);
+    throw new Error(`Switch to Venues Editor\n(${workVEURL} or\n${learnVEURL})\n`);
   }
 
   copyToClipboard(venueObject);
