@@ -88,6 +88,7 @@ for (const key in hoursTextObj) {
   // https://goo.gl/maps/1AHE6PgRJFHMs6qf9
   // https://g.page/fblinen?share
   // https://goo.gl/maps/4tAEVykgZ5P8nCko9
+  // https://goo.gl/maps/TvXXvzugCrzm3qPt6
 
 
 
@@ -98,4 +99,3 @@ for (const key in hoursTextObj) {
     return!!(t.day||t.time.start||t.time.end)&&utilIsValidOperatingHourData(t,function(e){r.push(e+n),f.add(t.id)},function(e){o.push(e+n),g.add(t.id)})}),function(e){r.push(e)})),t={"opening_hours:pl":e};
     o.length||r.length?(s.container().call(n,o,r,e,L),S()):L(t)}
 
-    
