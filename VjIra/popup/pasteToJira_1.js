@@ -31,9 +31,8 @@ try {
 
           // paste values to Jira fields
           // const jiraFields = document.querySelectorAll(".gbXyYv");
-          // const jiraFields = document.querySelectorAll(".cEMour");
-          const jiraFields = document.querySelectorAll("._otyr7vkz");
-          console.dir("jiraFields: ", jiraFields);
+          const jiraFields = document.querySelectorAll(".cEMour");
+          console.dir(jiraFields);
           if (!jiraFields) {
             throw new Error(`CSS class for "jiraFields" not found\n`);
           }
@@ -75,9 +74,6 @@ try {
             }
             if (!jiraFieldValueDiv) {
               jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".cwFpGL");
-            }
-            if (!jiraFieldValueDiv) {
-              jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector("._1e0c1txw");
             }
             if (!jiraFieldValueDiv) {
               throw new Error(`CSS class for "jiraFieldValueDiv" not found\n`);
@@ -134,9 +130,6 @@ try {
             }
             if (!shlyapa) {
               shlyapa = document.querySelector(".css-46zqrd");
-            }
-            if (!shlyapa) {
-              shlyapa = document.querySelector(".css-1ysy1r4");
             }
             if (!shlyapa) {
               throw new Error(`CSS class for "shlyapa" not found\n`);

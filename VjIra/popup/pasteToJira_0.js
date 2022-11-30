@@ -1,5 +1,3 @@
-// const { dir } = require("console");
-
 try {
   const currentURL = window.location.href;
   const workJiraURL = "https://placer.atlassian.net/";
@@ -30,14 +28,11 @@ try {
           const address = "fullAddress";
 
           // paste values to Jira fields
-          // const jiraFields = document.querySelectorAll(".gbXyYv");
-          // const jiraFields = document.querySelectorAll(".cEMour");
-          const jiraFields = document.querySelectorAll("._otyr7vkz");
-          console.dir("jiraFields: ", jiraFields);
+          const jiraFields = document.querySelectorAll(".gbXyYv");
           if (!jiraFields) {
             throw new Error(`CSS class for "jiraFields" not found\n`);
           }
-
+          
           for (let i = 0; i < jiraFields.length; i++) {
             if (jiraFields[i].innerText.indexOf("Venue Editor Link") === 0) {
               const tagValue = venueObject[venueEditorLink];
@@ -71,58 +66,25 @@ try {
             let jiraFieldValueDiv;
             jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".kLiHRY");
             if (!jiraFieldValueDiv) {
-              jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".HsCdE");
-            }
-            if (!jiraFieldValueDiv) {
               jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector(".cwFpGL");
-            }
-            if (!jiraFieldValueDiv) {
-              jiraFieldValueDiv = jiraFields[jiraFieldindex].querySelector("._1e0c1txw");
             }
             if (!jiraFieldValueDiv) {
               throw new Error(`CSS class for "jiraFieldValueDiv" not found\n`);
             }
-            // console.log("__jiraFieldValueDiv__");
-            // console.log(jiraFieldValueDiv);
-            // console.log("__jiraFieldValueDiv__");
-
             jiraFieldValueDiv.click();
 
             let jiraFieldValueInput;
-            // jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
-            if (!jiraFieldValueInput) {
-              // jiraFieldValueInput = document.querySelector(".cwFpGL>.cKJphd");
-              jiraFieldValueInput = document.querySelector(".css-wxvfrp");
-            }
+            jiraFieldValueInput = document.querySelectorAll(".bfCuIo");
             if (!jiraFieldValueInput) {
               throw new Error(`CSS class for "jiraFieldValueInput" not found\n`);
             }
-            // console.log("++jiraFieldValueInput++");
-            // console.dir(jiraFieldValueInput);
-            // // console.log(jiraFieldValueInput[0]);
-            // console.log("++jiraFieldValueInput++");
-            jiraFieldValueInput.click();
-
-
-            const inputKeys = Object.keys(jiraFieldValueInput);
-            // console.log("!!inputKeys");
-            // console.log(inputKeys);
-            // console.log("!!inputKeys");
-
+            jiraFieldValueInput[0].click();
+            
+            const inputKeys = Object.keys(jiraFieldValueInput[0]);
             const reactEventHandler = inputKeys.find(prop => prop.indexOf("__reactEventHandlers") === 0);
-            // console.log("==reactEventHandler");
-            // console.log(reactEventHandler);
-            // console.log("==reactEventHandler");
 
-            // console.log("$$jiraFieldValueInput.reactEventHandler");
-            // console.dir(jiraFieldValueInput);
-            // console.log("$$jiraFieldValueInput.reactEventHandler");
-            // console.log("@@@reactEventHandler");
-            // console.log(reactEventHandler);
-            // console.log("@@@reactEventHandler");
             if (reactEventHandler) {
-
-              jiraFieldValueInput[reactEventHandler].onChange(eventForOnChange);
+              jiraFieldValueInput[0][reactEventHandler].onChange(eventForOnChange);
             } else {
               throw new Error(`__reactEventHandlers not found\n`);
             }
@@ -134,9 +96,6 @@ try {
             }
             if (!shlyapa) {
               shlyapa = document.querySelector(".css-46zqrd");
-            }
-            if (!shlyapa) {
-              shlyapa = document.querySelector(".css-1ysy1r4");
             }
             if (!shlyapa) {
               throw new Error(`CSS class for "shlyapa" not found\n`);
